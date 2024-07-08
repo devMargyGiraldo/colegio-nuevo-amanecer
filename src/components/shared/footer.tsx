@@ -27,11 +27,11 @@ export const Footer = async () => {
 
   return (
     <footer className="fixed bottom-0 h-16 w-full px-2 pb-2">
-      <Card className="flex h-full items-center justify-between gap-x-16 p-2 md:justify-center">
+      <Card className="flex h-full items-center justify-between p-2 md:justify-center">
         <div className="flex items-center justify-center gap-x-4 px-4">
           <RoutesIcons />
         </div>
-        <div className="right-4 md:absolute">
+        <div className="md:absolute md:right-4">
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -53,7 +53,6 @@ export const Footer = async () => {
                 <DropdownMenuGroup>
                   <DropdownMenuItem>Perfil</DropdownMenuItem>
                   <DropdownMenuItem>Configuracion</DropdownMenuItem>
-
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
                     <LogoutButton />
