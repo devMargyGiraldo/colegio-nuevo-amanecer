@@ -11,3 +11,8 @@ export const LoginSchema = z.object({
     .min(1, { message: 'Contraseña requerida' })
     .min(8, { message: 'La contraseña debe tener al menos 8 caracteres' }),
 });
+
+export const profileSchema = z.object({
+  name: z.string().min(1),
+  email: z.string().email(),
+});

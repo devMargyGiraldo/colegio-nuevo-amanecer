@@ -36,6 +36,7 @@ interface FormProps {
   onSubmit: (data: any) => void;
   fields: FieldData[];
   buttonLabel: string;
+  buttonStatus?: boolean;
 }
 
 export const Form = ({
@@ -43,6 +44,7 @@ export const Form = ({
   fields,
   onSubmit,
   buttonLabel,
+  buttonStatus = false,
 }: FormProps) => {
   const form = useForm<z.infer<typeof zodSchema>>({
     resolver: zodResolver(zodSchema),
@@ -81,7 +83,7 @@ export const Form = ({
             )}
           />
         ))}
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full" disabled={buttonStatus}>
           {buttonLabel}
         </Button>
       </form>

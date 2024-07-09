@@ -50,6 +50,7 @@ export const LoginForm = () => {
         ]}
         onSubmit={onSubmit}
         buttonLabel={'Login'}
+        buttonStatus={isPending}
       />
       <Button size={'sm'} variant={'link'} className="px-0 font-normal" asChild>
         <Link href={'/auth/reset'}>Olvidaste tu contraseña?</Link>
