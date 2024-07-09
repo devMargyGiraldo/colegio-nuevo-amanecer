@@ -15,7 +15,8 @@ datasource db {
 }
 
 enum UserRole {
-  USER
+  STUDENT
+  TEACHER
   ADMIN
 }
 
@@ -27,7 +28,7 @@ model User {
   image                String?
   emailVerified        DateTime?
   password             String
-  role                 UserRole               @default(USER)
+  role                 UserRole
   isTwoFactorEnabled   Boolean                @default(false)
   twoFactoConfirmation TwoFactorConfirmation?
 
