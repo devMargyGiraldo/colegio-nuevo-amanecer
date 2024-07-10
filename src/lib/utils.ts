@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import generator from 'generate-password';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -18,4 +19,15 @@ export const getInitials = (name: string) => {
     .map((part) => part[0])
     .join('')
     .toUpperCase();
+};
+
+export const generateTemporaryPassword = () => {
+  return generator.generate({
+    length: 10,
+    numbers: true,
+    uppercase: true,
+    excludeSimilarCharacters: true,
+    lowercase: true,
+    symbols: false,
+  });
 };

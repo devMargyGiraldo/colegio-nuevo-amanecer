@@ -25,6 +25,8 @@ model User {
   name                 String
   documentId           String                 @unique
   email                String                 @unique
+  phoneNumber          String
+  address              String
   image                String?
   emailVerified        DateTime?
   password             String
