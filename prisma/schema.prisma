@@ -20,6 +20,11 @@ enum UserRole {
   ADMIN
 }
 
+enum EnrollmentStatus {
+  ACTIVE
+  INACTIVE
+}
+
 model User {
   id                   String                 @id @default(cuid())
   name                 String
@@ -36,6 +41,128 @@ model User {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  studentScores      ScoreRecord[]       @relation(name: "StudentScores")
+  teacherScores      ScoreRecord[]       @relation(name: "TeacherScores")
+  studentEnrollments StudentEnrollment[]
+  teacherEnrollments TeacherEnrollment[]
+}
+
+model AchievementTemplate {
+  id       String @id @default(cuid())
+  name     String
+  category String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  achievements Achievement[]
+}
+
+model Achievement {
+  id                    String @id @default(cuid())
+  achievementTemplateId String
+  subjectId             String
+  periodId              String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  achievementTemplate AchievementTemplate @relation(fields: [achievementTemplateId], references: [id])
+  subject             Subject             @relation(fields: [subjectId], references: [id])
+  period              Period              @relation(fields: [periodId], references: [id])
+  scoreRecords        ScoreRecord[]
+
+  @@unique([achievementTemplateId, subjectId, periodId])
+}
+
+model Grade {
+  id           String @id @default(cuid())
+  name         String
+  academicYear Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  periods            Period[]
+  studentEnrollments StudentEnrollment[]
+  teacherEnrollments TeacherEnrollment[]
+}
+
+model Subject {
+  id   String @id @default(cuid())
+  name String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  achievements       Achievement[]
+  teacherEnrollments TeacherEnrollment[]
+}
+
+model Period {
+  id        String   @id @default(cuid())
+  name      String
+  startDate DateTime
+  endDate   DateTime
+  gradeId   String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  grade        Grade         @relation(fields: [gradeId], references: [id])
+  achievements Achievement[]
+
+  @@unique([name, gradeId])
+}
+
+model ScoreRecord {
+  id            String @id @default(cuid())
+  studentId     String
+  teacherId     String
+  achievementId String
+  score         Float
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  student     User        @relation(name: "StudentScores", fields: [studentId], references: [id])
+  teacher     User        @relation(name: "TeacherScores", fields: [teacherId], references: [id])
+  achievement Achievement @relation(fields: [achievementId], references: [id])
+
+  @@unique([studentId, achievementId])
+}
+
+model StudentEnrollment {
+  id        String           @id @default(cuid())
+  studentId String
+  gradeId   String
+  status    EnrollmentStatus @default(ACTIVE)
+
+  student User  @relation(fields: [studentId], references: [id])
+  grade   Grade @relation(fields: [gradeId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([studentId, gradeId])
+}
+
+model TeacherEnrollment {
+  id        String           @id @default(cuid())
+  gradeId   String
+  subjectId String
+  teacherId String
+  status    EnrollmentStatus @default(ACTIVE)
+
+  grade   Grade   @relation(fields: [gradeId], references: [id])
+  subject Subject @relation(fields: [subjectId], references: [id])
+  teacher User    @relation(fields: [teacherId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([gradeId, subjectId, teacherId])
 }
 
 model VerificationToken {

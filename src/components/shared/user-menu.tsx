@@ -33,6 +33,9 @@ export const UserMenu = async ({ user }: { user: User }) => {
           <DropdownMenuItem asChild>
             <Link href="/profile">Perfil</Link>
           </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href="/register">Register</Link>
+          </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <LogoutButton />
