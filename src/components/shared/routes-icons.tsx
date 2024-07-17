@@ -31,7 +31,10 @@ const RouteIcon = ({
         <Icon
           className={clsx(
             'h-8 w-8',
-            actualPathName === pathname ? 'text-gray-800' : 'text-gray-300',
+            (actualPathName.startsWith(pathname) && pathname !== '/') ||
+              (actualPathName === '/' && pathname === '/')
+              ? 'text-gray-800'
+              : 'text-gray-300',
           )}
         />
       </Link>
