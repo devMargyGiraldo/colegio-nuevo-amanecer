@@ -20,10 +20,12 @@ export default async function MasterPage() {
           <MasterCard
             title="Maestros"
             description="En este modulo puedes visualizar las asignaturas"
+            data={asignaturas}
           />
           <MasterCard
             title="Estudiantes"
             description="En este modulo puedes visualizar las asignaturas"
+            data={asignaturas}
           />
         </div>
       </CardContent>
