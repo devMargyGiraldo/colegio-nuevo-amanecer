@@ -1,9 +1,5 @@
 const AcademicPage = () => {
-  return (
-    <div>
-      <h1>Academic Page</h1>
-    </div>
-  );
+  return <div></div>;
 };
 
 export default AcademicPage;

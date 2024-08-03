@@ -4,8 +4,6 @@ import { Form } from '@/components/shared/form';
 import { profileSchema } from '@/schemas';
 import { User } from '@prisma/client';
 import { useTransition } from 'react';
-import { Button } from '../ui/button';
-import Link from 'next/link';
 import { toast } from 'sonner';
 
 export const ProfileForm = ({ user }: { user: User }) => {

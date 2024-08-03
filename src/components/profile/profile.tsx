@@ -12,6 +12,9 @@ import { ProfileForm } from './profile-form';
 import { redirect } from 'next/navigation';
 import { Separator } from '../ui/separator';
 import { getInitials } from '@/lib/utils';
+import { Button } from '../ui/button';
+import Link from 'next/link';
+import { ChangePassword } from './change-password';
 
 export const Profile = async () => {
   const session = await auth();
@@ -49,8 +52,10 @@ export const Profile = async () => {
         <div className="p-4">
           <Separator className="w-full" />
         </div>
-        <CardContent>
+        <CardContent className="flex flex-col">
           <ProfileForm user={user} />
+
+          <ChangePassword />
         </CardContent>
       </Card>
     </div>
