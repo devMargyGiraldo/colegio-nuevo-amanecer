@@ -13,7 +13,7 @@ import { getUser } from '@/lib/utils';
 import { EnrollmentStatus } from '@prisma/client';
 import { redirect } from 'next/navigation';
 
-const PeriodLayout = async ({ children }: { children: React.ReactNode }) => {
+const NotesLayout = async ({ children }: { children: React.ReactNode }) => {
   const user = await getUser();
 
   const studentEnrollment = await db.studentEnrollment.findFirst({
@@ -25,13 +25,13 @@ const PeriodLayout = async ({ children }: { children: React.ReactNode }) => {
 
   const periods = await db.period.findMany({
     where: {
-      gradeId: studentEnrollment?.gradeId,
+      gradeId: studentEnrollment?.gradeId || '',
     },
   });
 
   const handleChange = async (value: string) => {
     'use server';
-    redirect(`/academic/period/${value}`);
+    redirect(`/academic/notes/${value}`);
   };
 
   return (
@@ -59,4 +59,4 @@ const PeriodLayout = async ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default PeriodLayout;
+export default NotesLayout;

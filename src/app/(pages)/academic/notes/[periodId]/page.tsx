@@ -13,12 +13,12 @@ import {
 import { getUser } from '@/lib/utils';
 interface PeriodPageProps {
   params: {
-    id: string;
+    periodId: string;
   };
 }
 
 const PeriodPage = async ({ params }: PeriodPageProps) => {
-  const periodId = params.id;
+  const periodId = params.periodId;
   const user = await getUser();
   const partialScores = await getPartialScoresByStudentId(user.id, periodId);
 

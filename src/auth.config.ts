@@ -11,6 +11,8 @@ export default {
         const validateValues = LoginSchema.safeParse(credentials);
         if (validateValues.success) {
           const { email, password } = validateValues.data;
+
+          console.log(email, password);
           const user = await getUserByEmail(email);
 
           if (!user) {

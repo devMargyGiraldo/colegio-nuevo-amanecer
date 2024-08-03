@@ -49,7 +49,7 @@ export const NavigationMenu = ({ userRole }: { userRole: UserRole }) => {
           {userRole === UserRole.ADMIN && (
             <DropdownMenuItem
               onClick={() => {
-                handleRedirect('academic/register');
+                handleRedirect('/academic/register');
               }}
             >
               <PersonIcon className="mr-2 h-4 w-4" />

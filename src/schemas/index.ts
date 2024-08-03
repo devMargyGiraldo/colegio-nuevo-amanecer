@@ -18,6 +18,17 @@ export const profileSchema = z.object({
   email: z.string().email(),
 });
 
+export const changePasswordSchema = z.object({
+  actualPassword: z
+    .string()
+    .min(1, { message: 'Contraseña requerida' })
+    .min(8, { message: 'La contraseña debe tener al menos 8 caracteres' }),
+  newPassword: z
+    .string()
+    .min(1, { message: 'Contraseña requerida' })
+    .min(8, { message: 'La contraseña debe tener al menos 8 caracteres' }),
+});
+
 export const RegisterSchema = z.object({
   documentId: z
     .string()
